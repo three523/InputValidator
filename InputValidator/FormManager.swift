@@ -50,7 +50,7 @@ final class FormManager {
     
     func validate(fieldName: String, data: [String: Any]) {
         let error = forms[fieldName]?.validate(data: data)
-        result[fieldName]? = error == nil
+        result[fieldName] = error == nil
         guard let onChange = onChanges[fieldName] else { return }
         onChange?(error)
     }

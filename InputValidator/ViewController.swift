@@ -11,6 +11,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmTextField: UITextField!
+    let testTextField: UITextField = {
+        let field = UITextField()
+        field.customName = "Test"
+        field.font = .systemFont(ofSize: 14, weight: .regular)
+        field.textColor = .black
+        field.borderStyle = .roundedRect
+        return field
+    }()
     @IBOutlet weak var okButton: UIButton!
     
     private let formManager = FormManager()
@@ -18,7 +26,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(testTextField)
+        
+        testTextField.translatesAutoresizingMaskIntoConstraints = false
+        testTextField.topAnchor.constraint(equalTo: passwordConfirmTextField.bottomAnchor, constant: 16).isActive = true
+        testTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        testTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
+        
+        testTextField.customName = "test"
+        testTextField.onFocusOutHandler = { error in
+            if let error {
+                print(error.localizedDescription)
+                return
+            }
+            print("validate")
+        }
+        
         emailTextField.addTarget(self, action: #selector(emailDidChange), for: .editingChanged)
+        
         let fieldModel = FieldModel(fieldName: "email", isRequired: true, type: .email)
         let passwordFieldModel = FieldModel(fieldName: "password", isRequired: true, type: .password)
         let passwordConfirmModel = FieldModel(fieldName: "passwordConfirm", fieldNameToCompare: "phoneNumber")
@@ -67,4 +92,3 @@ class ViewController: UIViewController {
         print(formManager.formValidateResult())
     }
 }
-
