@@ -5,7 +5,7 @@
 //  Created by 김도현 on 2024/01/13.
 //
 
-import Foundation
+import UIKit
 
 final class FormManager {
     

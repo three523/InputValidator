@@ -23,3 +23,25 @@ final class FormValidator: Validatable {
         return nil
     }
 }
+
+protocol ValidatableTest {
+    func validate(fieldText: String?) -> ValidateError?
+}
+
+final class FormValidatorTest: ValidatableTest {
+    
+    var validations: [ValidatableTest]
+    
+    init(validations: [ValidatableTest]) {
+        self.validations = validations
+    }
+    
+    func validate(fieldText: String?) -> ValidateError? {
+        for validation in validations {
+            if let error = validation.validate(fieldText: fieldText) {
+                return error
+            }
+        }
+        return nil
+    }
+}

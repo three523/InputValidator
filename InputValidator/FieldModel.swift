@@ -5,11 +5,11 @@
 //  Created by 김도현 on 2024/01/13.
 //
 
-import Foundation
+import UIKit
 
-struct FieldModel: Model {
+struct FieldModel {
     
-    enum ValidateType: String, Codable {
+    enum ValidateType {
         case email
         case password
         case confirm
@@ -33,7 +33,7 @@ struct FieldModel: Model {
     init(fieldName: String, fieldNameToCompare: String) {
         self.fieldName = fieldName
         self.fieldNameToCompare = fieldNameToCompare
-        self.isRequired = true
+        self.isRequired = false
         self.type = .confirm
         self.pattern = nil
     }

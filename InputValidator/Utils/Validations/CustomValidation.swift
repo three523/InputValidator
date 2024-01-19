@@ -22,3 +22,19 @@ final class CustomValidation: Validatable {
         return nil
     }
 }
+
+final class CustomValidationTest: ValidatableTest {
+    private let fieldName: String
+    private let customValidator: Validator
+    
+    init(fieldName: String, pattern: String) {
+        self.fieldName = fieldName
+        self.customValidator = CustomValidator(pattern: pattern)
+    }
+    
+    func validate(fieldText: String?) -> ValidateError? {
+        guard let value = fieldText,
+              customValidator.isValid(text: value) else { return .validate(fieldName) }
+        return nil
+    }
+}

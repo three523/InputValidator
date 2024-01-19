@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18C274832B58009F00E4A053 /* UITextField+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C274822B58009F00E4A053 /* UITextField+Validate.swift */; };
+		18C274832B58009F00E4A053 /* ValidateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C274822B58009F00E4A053 /* ValidateTextField.swift */; };
+		18CFA9942B58F59D00D5C56A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFA9932B58F59D00D5C56A /* String.swift */; };
 		18D94FDB2B527E6F00D94F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D94FDA2B527E6F00D94F5A /* AppDelegate.swift */; };
 		18D94FDD2B527E6F00D94F5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D94FDC2B527E6F00D94F5A /* SceneDelegate.swift */; };
 		18D94FDF2B527E6F00D94F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D94FDE2B527E6F00D94F5A /* ViewController.swift */; };
@@ -34,7 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		18C274822B58009F00E4A053 /* UITextField+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Validate.swift"; sourceTree = "<group>"; };
+		18C274822B58009F00E4A053 /* ValidateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateTextField.swift; sourceTree = "<group>"; };
+		18CFA9932B58F59D00D5C56A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		18D94FD72B527E6F00D94F5A /* InputValidator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InputValidator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D94FDA2B527E6F00D94F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18D94FDC2B527E6F00D94F5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +106,8 @@
 				18D950132B5280FD00D94F5A /* Model.swift */,
 				18D950112B5280F800D94F5A /* FieldModel.swift */,
 				18D950152B52AF7F00D94F5A /* FormValidator.swift */,
-				18C274822B58009F00E4A053 /* UITextField+Validate.swift */,
+				18C274822B58009F00E4A053 /* ValidateTextField.swift */,
+				18CFA9932B58F59D00D5C56A /* String.swift */,
 			);
 			path = InputValidator;
 			sourceTree = "<group>";
@@ -244,9 +247,10 @@
 				18D9500B2B527EA400D94F5A /* PasswordValidator.swift in Sources */,
 				18D94FDB2B527E6F00D94F5A /* AppDelegate.swift in Sources */,
 				18D950142B5280FD00D94F5A /* Model.swift in Sources */,
-				18C274832B58009F00E4A053 /* UITextField+Validate.swift in Sources */,
+				18C274832B58009F00E4A053 /* ValidateTextField.swift in Sources */,
 				18D950002B527EA400D94F5A /* ValidateError.swift in Sources */,
 				18D950042B527EA400D94F5A /* Validatable.swift in Sources */,
+				18CFA9942B58F59D00D5C56A /* String.swift in Sources */,
 				18D950092B527EA400D94F5A /* PhoneNumberValidator.swift in Sources */,
 				18D950102B527FE400D94F5A /* FormManager.swift in Sources */,
 				18D94FDD2B527E6F00D94F5A /* SceneDelegate.swift in Sources */,
