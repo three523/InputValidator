@@ -23,8 +23,8 @@ extension ValidateError: LocalizedError {
             return NSLocalizedString("\(fieldName) is not Validate", comment: "")
         case .confirm(let fieldName, let confirmFieldName):
             return NSLocalizedString("\(fieldName) and \(confirmFieldName) are not the same", comment: "")
-        case .requiredEmpty(let fieldLabel):
-            return NSLocalizedString("\(fieldLabel) is required", comment: "")
+        case .requiredEmpty(let fieldName):
+            return NSLocalizedString("\(fieldName) is required", comment: "")
         }
     }
 }

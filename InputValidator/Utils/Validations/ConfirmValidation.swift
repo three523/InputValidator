@@ -23,3 +23,22 @@ final class ConfirmValidation: Validatable {
         return nil
     }
 }
+
+final class ConfirmValidationTest: ValidatableTest {
+    private let fieldName: String
+    private let fieldNameToCompare: String
+    var confirmTextHandler: (() -> String?)?
+    
+    init(fieldName: String, fieldNameToCompare: String, confirmTextHandler: @escaping (() -> String?)) {
+        self.fieldName = fieldName
+        self.fieldNameToCompare = fieldNameToCompare
+        self.confirmTextHandler = confirmTextHandler
+    }
+    
+    func validate(fieldText: String?) -> ValidateError? {
+        guard let fieldText = fieldText,
+              let fieldToCompareText = confirmTextHandler?(),
+              fieldText == fieldToCompareText else { return .confirm(fieldName, fieldNameToCompare) }
+        return nil
+    }
+}

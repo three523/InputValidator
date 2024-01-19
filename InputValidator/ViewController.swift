@@ -11,70 +11,55 @@ class ViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmTextField: UITextField!
-    let testTextField: UITextField = {
-        let field = UITextField()
-        field.customName = "Test"
-        field.font = .systemFont(ofSize: 14, weight: .regular)
-        field.textColor = .black
+    @IBOutlet weak var okButton: UIButton!
+    
+    private let testEmailTextField = {
+        let field = ValidateTextField(fieldName: "email", rules: [.required, .email])
+        field.font = .systemFont(ofSize: 16, weight: .regular)
         field.borderStyle = .roundedRect
         return field
     }()
-    @IBOutlet weak var okButton: UIButton!
-    
     private let formManager = FormManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(testTextField)
-        
-        testTextField.translatesAutoresizingMaskIntoConstraints = false
-        testTextField.topAnchor.constraint(equalTo: passwordConfirmTextField.bottomAnchor, constant: 16).isActive = true
-        testTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        testTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
-        
-        testTextField.customName = "test"
-        testTextField.onFocusOutHandler = { error in
+        view.addSubview(testEmailTextField)
+
+        testEmailTextField.translatesAutoresizingMaskIntoConstraints = false
+        testEmailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 300).isActive = true
+        testEmailTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        testEmailTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+
+        testEmailTextField.onChangeHandler = { error in
             if let error {
                 print(error.localizedDescription)
                 return
             }
-            print("validate")
+            print("TestValidate")
         }
+        testEmailTextField.textChangeAction(enable: true)
         
-        emailTextField.addTarget(self, action: #selector(emailDidChange), for: .editingChanged)
-        
-        let fieldModel = FieldModel(fieldName: "email", isRequired: true, type: .email)
         let passwordFieldModel = FieldModel(fieldName: "password", isRequired: true, type: .password)
-        let passwordConfirmModel = FieldModel(fieldName: "passwordConfirm", fieldNameToCompare: "phoneNumber")
-        formManager.appendForm(fieldModel: fieldModel) { error in
+        let confirmFieldModel = FieldModel(fieldName: "passwordConfirm", fieldNameToCompare: "password")
+        formManager.appendForm(fieldModel: passwordFieldModel) { error in
             if let error {
                 print(error.localizedDescription)
                 return
             }
-            print("email Validate")
+            print("Password Validate")
         }
         
-        passwordConfirmTextField.addTarget(self, action: #selector(confirmDidChange), for: .allEditingEvents)
-        formManager.appendForm(fieldModel: passwordConfirmModel) { error in
+        formManager.appendForm(fieldModel: confirmFieldModel) { error in
             if let error {
                 print(error.localizedDescription)
                 return
             }
-            print("confirm")
+            print("Confirm Validate")
         }
         
-        let phoneNumberFieldModel = FieldModel(fieldName: "phoneNumber", isRequired: false, pattern: "^01[0-9]{8,9}$")
-        
-        passwordTextField.addTarget(self, action: #selector(phoneNumberDidChange), for: .editingChanged)
-        formManager.appendForm(fieldModel: phoneNumberFieldModel) { error in
-            if let error {
-                print(error.localizedDescription)
-                return
-            }
-            print("phone Validate")
-        }
-        // Do any additional setup after loading the view.
+        passwordTextField.addTarget(self, action: #selector(passwordDidChange), for: .editingChanged)
+        passwordConfirmTextField.addTarget(self, action: #selector(confirmDidChange), for: .editingChanged)
     }
 
     @objc func emailDidChange(_ textField: UITextField) {
@@ -82,11 +67,12 @@ class ViewController: UIViewController {
     }
     
     @objc func confirmDidChange(_ textField: UITextField) {
-        formManager.validate(fieldName: "passwordConfirm", data: ["passwordConfirm": textField.text, "phoneNumber": passwordTextField.text])
+        formManager.validate(fieldName: "passwordConfirm", data: ["passwordConfirm": textField.text, "password": passwordTextField.text])
     }
     
-    @objc func phoneNumberDidChange(_ textField: UITextField) {
-        formManager.validate(fieldName: "phoneNumber", data: ["phoneNumber": textField.text])
+    @objc func passwordDidChange(_ textField: UITextField) {
+        formManager.validate(fieldName: "password", data: ["password": textField.text])
+        formManager.validate(fieldName: "passwordConfirm", data: ["passwordConfirm": passwordConfirmTextField.text, "password": passwordTextField.text])
     }
     @IBAction func okButtonClick(_ sender: Any) {
         print(formManager.formValidateResult())

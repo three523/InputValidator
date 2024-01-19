@@ -20,3 +20,17 @@ final class RequiredFieldValidation: Validatable {
         return nil
     }
 }
+
+final class RequiredFieldValidationTest: ValidatableTest {
+    let fieldName: String
+    
+    init(fieldName: String) {
+        self.fieldName = fieldName
+    }
+    
+    func validate(fieldText: String?) -> ValidateError? {
+        guard let fieldText,
+              fieldText.isEmpty == false else { return .requiredEmpty(fieldName) }
+        return nil
+    }
+}

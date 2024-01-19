@@ -22,3 +22,19 @@ final class EmailValidation: Validatable {
         return nil
     }
 }
+
+final class EmailValidationTest: ValidatableTest {
+    private let fieldName: String
+    private let emailValidator: Validator
+    
+    init(fieldName: String, emailValidator: Validator) {
+        self.fieldName = fieldName
+        self.emailValidator = emailValidator
+    }
+    
+    func validate(fieldText: String?) -> ValidateError? {
+        guard let email = fieldText,
+              emailValidator.isValid(text: email) else { return .validate(fieldName) }
+        return nil
+    }
+}
